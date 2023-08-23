@@ -5,8 +5,7 @@ from utils.recipes.factory import make_recipe
 
 
 def home(request):
-    recipes = get_list_or_404(
-        Recipe.objects.filter(
+    recipes = (Recipe.objects.filter(
             is_published=True,
         ).order_by('-id')
     )
