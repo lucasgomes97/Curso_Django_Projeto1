@@ -2,7 +2,7 @@ from django.urls import resolve, reverse
 
 from recipes import views
 
-from .test_recipe_base import Recipe, RecipeTestBase, User
+from .test_recipe_base import RecipeTestBase
 
 
 class RecipeViewsTest(RecipeTestBase):
@@ -21,12 +21,16 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
+    
     def test_recipe_home_shows_no_recipes_found_if_no_recipes(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
             '<h1>No recipes found here😥</h1>',
             response.content.decode('utf-8')
         )
+
+        
+
 
     def test_recipe_home_template_loads_recipes(self):
         # Need a recipe for this test
